@@ -26,6 +26,18 @@ async def on_pr_closed(*, pull_request, **_kw):
     await github_api.post(url, data={"body": message})
 
 
+@process_event_actions("issue_comment", {"created"})
+@process_webhook_payload
+async def on_comment_created(*, comment, **_kw):
+    github_api = RUNTIME_CONTEXT.app_installation_client
+    url = comment["comments_url"]
+    await github_api.post(
+        f"{url}/reactions",
+        data={"content": "confused"},
+        preview_api_version="squirrel-girl",
+    )
+
+
 if __name__ == "__main__":
     run_app(
         name="pycon-2020-github-bot",
