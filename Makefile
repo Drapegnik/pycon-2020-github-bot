@@ -9,3 +9,7 @@ lint:
 .PHONY: start
 start:
 	python github_bot
+
+.PHONY: logs
+logs:
+	heroku logs -a github-bots
