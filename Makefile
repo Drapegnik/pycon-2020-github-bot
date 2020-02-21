@@ -4,4 +4,8 @@ install:
 
 .PHONY: lint
 lint:
-	black .
+	black github_bot
+
+.PHONY: start
+start:
+	python github_bot
